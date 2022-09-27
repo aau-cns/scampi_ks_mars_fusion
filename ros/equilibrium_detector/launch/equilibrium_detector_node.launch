@@ -1,0 +1,10 @@
+<launch>
+  <node name="eq_detector" pkg="equilibrium_detector" type='equilibrium_detector_node.py' output="screen">
+      <param name= "detector_params" value="$(find equilibrium_detector)/configs/detector_params.yaml" />
+      <remap from='/cable_len' to='/spc_ADS_node/spc_cable_length' />
+      <remap from='/imu' to='/mti/sensor/imu' />
+      <remap from='/fk_pose' to='/scampi_ks_ros/fk_pose' />
+      <remap from='/eq_pose' to='/equilibrium_detector/eq_pose' />
+  </node>
+  
+</launch>

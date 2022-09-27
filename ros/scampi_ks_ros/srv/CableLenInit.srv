@@ -1,0 +1,4 @@
+geometry_msgs/PoseStamped eq_pose
+float64[] eq_spc_len
+---
+int32 result

@@ -1,0 +1,10 @@
+<launch>
+  <node name="scampi_ks" pkg="scampi_ks_ros" type='scampi_ks_node.py' output="screen">
+      <param name="rate" value="10" />
+      <param name= "robot_config" value="$(find scampi_ks_ros)/configs/robot_params.yaml" />
+      <remap from='/cable_len' to='/spc_ADS_node/spc_cable_length' />
+      <remap from='/ekf_pose_prop' to='/mars_pose_node/pose_state_out' />
+      <remap from='/fk_pose' to='/scampi_ks_ros/fk_pose' />
+  </node>
+  
+</launch>
