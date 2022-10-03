@@ -27,13 +27,13 @@ No license in patents is granted.
 
 ## Prerequisites
 - For the C++ solver and the ROS nodes
-  - Install ROS as shown [here](http://wiki.ros.org/noetic/Installation/Ubuntu). We tried ROS1 noetic and also melodic on Ubuntu 18.04 and Ubuntu 20.
+  - Install ROS as shown [here](http://wiki.ros.org/noetic/Installation/Ubuntu). We tried ROS1 noetic and also melodic on Ubuntu 18.04 and Ubuntu 20
 
-  - Install the [catkin tools](https://catkin-tools.readthedocs.io/en/latest/installing.html) package.
+  - Install the [catkin tools](https://catkin-tools.readthedocs.io/en/latest/installing.html) package
 
-  - Install also the [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page) library.
+  - Install also the [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page) library
 
-  - Install Ceres as described in this link [here](http://ceres-solver.org/installation.html).
+  - Install Ceres as described in this link [here](http://ceres-solver.org/installation.html)
 
   - Install GTest
     ```bash
@@ -57,10 +57,10 @@ No license in patents is granted.
   - install `pip3 install pyquaternion`
   - install `pip3 install numpy`
   - install `pip3 install pyyaml`
-  - install [liegroups](https://github.com/utiasSTARS/liegroups).
+  - install [liegroups](https://github.com/utiasSTARS/liegroups)
 
 - Optional
-  - `sudo pip3 install rospkg catkin_pkg` resolves some issues with roslaunch of our ros nodes.
+  - `sudo pip3 install rospkg catkin_pkg` resolves some issues with roslaunch of our ros nodes
 
 
 
@@ -76,7 +76,7 @@ No license in patents is granted.
   git clone git@github.com:aau-cns/scampi_ks_mars_fusion.git
   ```
 
-- Compile and install the solver.
+- Compile and install the solver
   ```bash
   cd scampi_ks_mars_fusion
   cd solver
@@ -123,60 +123,60 @@ l_other is considered to be constant.
 One time at the beginning the true l_pulley_to_anchor needs to be known and send to the solver, such that we can compute the constant l_other.
 
 - Start ROS and replay the bagfile
-```bash
-# TERMINAL 1, 2 tabs
-cd location/of/bagfile
-roscore
-rosbag play 2D_CD_TC21_1_2020-12-01-16-56-00.bag  --pause -r 1.0 # start in pause mode
-```
+  ```bash
+  # TERMINAL 1, 2 tabs
+  cd location/of/bagfile
+  roscore
+  rosbag play 2D_CD_TC21_1_2020-12-01-16-56-00.bag  --pause -r 1.0 # start in pause mode
+  ```
 
 - On each new terminal that is started the setup.bash in devel needs to be sourced like this `source devel/setup.bash`.
 Or the sourcing is written to the `.bashrc` file, such that this is automated.
 
 - Start the estimator, the equilibrium detector and the kinematic solvers
-```bash
-# TERMINAL 2, 3 tabs
-cd catkin_ws
-source devel/setup.bash
-# Estimator
-roslaunch mars_ros mars_pose.launch imu_in_topic:=/mti/sensor/imu pose_with_cov_in_topic:=/equilibrium_detector/eq_pose
-# Equilibrium detector (Not doing much yet, future work)
-roslaunch equilibrium_detector equilibrium_detector_node.launch
-# Kinematics solvers
-roslaunch scampi_ks_ros solver_start_prop.launch
-```
+  ```bash
+  # TERMINAL 2, 3 tabs
+  cd catkin_ws
+  source devel/setup.bash
+  # Estimator
+  roslaunch mars_ros mars_pose.launch imu_in_topic:=/mti/sensor/imu pose_with_cov_in_topic:=/equilibrium_detector/eq_pose
+  # Equilibrium detector (Not doing much yet, future work)
+  roslaunch equilibrium_detector equilibrium_detector_node.launch
+  # Kinematics solvers
+  roslaunch scampi_ks_ros solver_start_prop.launch
+  ```
 
 - Configure the solver and initialize estimator, let the bagfile run
-```bash
-# TERMINAL 3
-cd scampi_ks_mars_fusion/ros
-# Set the true l_pulley_to_anchor, see notes on cable length input
-python send_init_cable_length.py
-# In the bagfile terminal, play back the bagfile a few steps by hitting 's' some seconds
-# until in the estimator tab the following messsage comes:
-#
-# "Update: 1.60684e+09
-# Warning: Core is not initialized yet. Measurement is stored but not processed"
-#
-# This initialized the estimator and updated it once.
-# Now the estimator can be used as input for the solver
-python set_pose_source.py 1
-# In the bagfile terminal, hit 'space' and just let the bagfile run.
-```
+  ```bash
+  # TERMINAL 3
+  cd scampi_ks_mars_fusion/ros
+  # Set the true l_pulley_to_anchor, see notes on cable length input
+  python send_init_cable_length.py
+  # In the bagfile terminal, play back the bagfile a few steps by hitting 's' some seconds
+  # until in the estimator tab the following messsage comes:
+  #
+  # "Update: 1.60684e+09
+  # Warning: Core is not initialized yet. Measurement is stored but not processed"
+  #
+  # This initialized the estimator and updated it once.
+  # Now the estimator can be used as input for the solver
+  python set_pose_source.py 1
+  # In the bagfile terminal, hit 'space' and just let the bagfile run.
+  ```
 
 - Visualize the data in rviz
-```bash
-# Another terminal
-rosrun tf static_transform_publisher 0 0 0 0 0 0 world map 100
-# Another terminal
-rosrun rviz rviz
-# open the provided rviz config
-```
+  ```bash
+  # Another terminal
+  rosrun tf static_transform_publisher 0 0 0 0 0 0 world map 100
+  # Another terminal
+  rosrun rviz rviz
+  # open the provided rviz config
+  ```
 
 - Record data for plotting
-```bash
-rosbag record -O test.bag /dh_optitrack/CustomDolly/pose /dh_optitrack/D2BackLeft/pose /dh_optitrack/D2BackRight/pose /dh_optitrack/D2FrontLeft/pose /dh_optitrack/D2FrontRight/pose /equilibrium_detector/eq_pose /mars_pose_node/pose_state_out /mars_pose_node/pose_state_out_center /mti/sensor/imu /scampi_ks_ros/fk_pose /spc_ADS_node/spc_cable_length /spc_ADS_node/spc_dolly_pose
-```
+  ```bash
+  rosbag record -O test.bag /dh_optitrack/CustomDolly/pose /dh_optitrack/D2BackLeft/pose /dh_optitrack/D2BackRight/pose /dh_optitrack/D2FrontLeft/pose /dh_optitrack/D2FrontRight/pose /equilibrium_detector/eq_pose /mars_pose_node/pose_state_out /mars_pose_node/pose_state_out_center /mti/sensor/imu /scampi_ks_ros/fk_pose /spc_ADS_node/spc_cable_length /spc_ADS_node/spc_dolly_pose
+  ```
 
 ## Unit tests for solver
 Trying out the Kinematic Solver and running some unit tests with google tests.
@@ -219,7 +219,7 @@ We are using the python interface of our C++ libraries in a jupyter notebook.
   ```
 
 - Try out the notebooks
-``` bash
-cd solver/notebooks
-jupyter-notebook
-```
+  ``` bash
+  cd solver/notebooks
+  jupyter-notebook
+  ```

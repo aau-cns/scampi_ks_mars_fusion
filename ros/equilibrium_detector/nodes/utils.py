@@ -92,7 +92,7 @@ class EqDetector():
         self.dataset.append([enc_var, gyr_var, acc_var])
 
         if len(self.dataset)>12500:
-            with open('/home/errr0/data.pckl','wb') as f:
+            with open('/tmp/data.pckl','wb') as f:
                 print('saving the dataset file')
                 pickle.dump(self.dataset,f)
                 self.dataset=[]
