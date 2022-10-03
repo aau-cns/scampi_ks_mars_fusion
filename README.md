@@ -92,6 +92,15 @@ No license in patents is granted.
   git submodule update --init --recursive
   catkin build scampi_ks_mars_fusion
   ```
+- Replace some files:
+  ```
+  cd ros/pose_wrapper_scampi
+  cp mars_pose.launch ../mars_ros/launch/mars_pose.launch
+  cp mars_wrapper_pose.cpp ../mars_ros/src/mars_wrapper_pose.cpp
+  cp mars_wrapper_pose.h ../mars_ros/include/mars_wrapper_pose.h
+  cp pose_config.yaml ../mars_ros/launch/config/pose_config.yaml
+  ```
+  
 - Source your catkin workspace such that you can use the nodes now
   ```bash
   cd ../.. # back to .../catkin_ws
