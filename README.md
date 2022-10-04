@@ -1,9 +1,9 @@
-# Kinematics-Inertial Fusion for Localization of Suspended Cable-Driven Robots with Hefty Cables
+# Kinematics-Inertial Fusion for Localization of an Underactuated Suspended Robot Considering Cable Sag
 
 [![License](https://img.shields.io/badge/License-AAUCNS-green.svg)](./LICENSE)
 
 This repository holds the Ceres implementation of the kinematic solver considering cable sag
-and its corresponding ROS nodes for fusing it with an onboard IMU module.
+and its corresponding ROS nodes for fusing it with an onboard IMU module using the [MaRS](https://github.com/aau-cns/mars_ros) framework, which is included as a git submodule.
 This solver is described in the following IROS 2022 publication.
 
 If you use this software in an academic research setting, please cite the
@@ -17,6 +17,11 @@ corresponding paper and consult the `LICENSE` file for a detailed explanation.
    year       = {2022},
 }
 ```
+
+**Authors:**
+- @Rooholla-KhorramBakht contributions regarding the C++ Google Ceres implementation and the python interface
+- @eallak contributions regarding the first prototype of the kinematic solvers (in MATLAB), hardware setup and data recording
+- @Chris-Bee author of [MaRS](https://github.com/aau-cns/mars_ros)
 
 ## License
 This software is made available to the public to use (_source-available_),
@@ -100,7 +105,7 @@ No license in patents is granted.
   cp mars_wrapper_pose.h ../mars_ros/include/mars_wrapper_pose.h
   cp pose_config.yaml ../mars_ros/launch/config/pose_config.yaml
   ```
-  
+
 - Source your catkin workspace such that you can use the nodes now
   ```bash
   cd ../.. # back to .../catkin_ws
