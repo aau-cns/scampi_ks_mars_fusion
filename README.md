@@ -19,9 +19,9 @@ corresponding paper and consult the `LICENSE` file for a detailed explanation.
 ```
 
 **Authors:**
-- @Rooholla-KhorramBakht contributions regarding the C++ Google Ceres implementation and the python interface
-- @eallak contributions regarding the first prototype of the kinematic solvers (in MATLAB), hardware setup and data recording
-- @Chris-Bee author of [MaRS](https://github.com/aau-cns/mars_ros)
+- [@Rooholla-KhorramBakht](https://github.com/Rooholla-KhorramBakht) contributions regarding the C++ Google Ceres implementation and the python interface
+- [@eallak](https://github.com/eallak) contributions regarding the first prototype of the kinematic solvers (in MATLAB), hardware setup and data recording
+- [@Chris-Bee](https://github.com/Chris-Bee) author of [MaRS](https://github.com/aau-cns/mars_ros)
 
 ## License
 This software is made available to the public to use (_source-available_),
