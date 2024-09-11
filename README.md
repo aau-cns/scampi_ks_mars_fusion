@@ -84,6 +84,7 @@ No license in patents is granted.
 - Compile and install the solver
   ```bash
   cd scampi_ks_mars_fusion
+  git submodule update --init --recursive
   cd solver
   mkdir build && cd build
   cmake ..
@@ -94,8 +95,7 @@ No license in patents is granted.
 - Get the code for the estimator as a git submodule and build the ROS nodes
   ```bash
   cd ../.. # back to .../scampi_ks_mars_fusion
-  git submodule update --init --recursive
-  catkin build scampi_ks_mars_fusion
+  catkin build scampi_ks_ros
   ```
 - Replace some files:
   ```
